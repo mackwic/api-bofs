@@ -1,15 +1,14 @@
 const express = require('express');
 const pkg = require('./package.json');
 
+const Routes = require('./src/routes');
+
 const app = express();
 const config = {
   PORT: (process.env.PORT || 3000),
 };
 
-app.get('/', (req, res) => {
-  const json = { name: pkg.name, version: pkg.version, author: pkg.author };
-  res.send(json);
-});
+Routes.setupAllRoutesInApp(app, Routes.routes);
 
 if (require.main === module) {
   // the file is run directly, run the server
@@ -18,5 +17,5 @@ if (require.main === module) {
 }
 
 module.exports = {
-  app, config,
-};
+    app, config, routes: Routes.routes
+}
