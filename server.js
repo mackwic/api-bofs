@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 
 if (require.main === module) {
   // the file is run directly, run the server
-  console.log(`Listing on port ${config.PORT}`);
+  console.log(`Listening on port ${config.PORT}`);
   app.listen(config.PORT);
 }
 
