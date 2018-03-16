@@ -1,7 +1,7 @@
 const GoogleSpreadsheet = require('google-spreadsheet');
 const moment = require('moment');
 
-function getDocument(documentId, serviceCredentials) {
+function getBofsDocument(documentId, serviceCredentials) {
   return new Promise((resolve, reject) => {
     const doc = new GoogleSpreadsheet(documentId);
     doc.useServiceAccountAuth(serviceCredentials, (authError) => {
@@ -14,7 +14,7 @@ function getDocument(documentId, serviceCredentials) {
   });
 }
 
-function findCell(inscriptionWorksheet) {
+function findNextBofDateCell(inscriptionWorksheet) {
   const DATE_CELL_POSITION = {
     'min-row': 3,
     'max-row': 3,
@@ -39,7 +39,7 @@ function getNextBofDate(config) {
   return async () => {
     let doc;
     try {
-      doc = await getDocument(config.id, config.credentials);
+      doc = await getBofsDocument(config.id, config.credentials);
     } catch (e) {
       return Promise.reject(e);
     }
@@ -49,7 +49,7 @@ function getNextBofDate(config) {
 
     let cell;
     try {
-      cell = await findCell(inscriptionWorksheet);
+      cell = await findNextBofDateCell(inscriptionWorksheet);
     } catch (e) {
       return Promise.reject(e);
     }
