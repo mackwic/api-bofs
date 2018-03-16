@@ -1,9 +1,16 @@
 # api-bofs
 
-Useful links:
+Le code de l'API qui expose les données des sessions Bof, passées et futures.
 
-- Trello: https://trello.com/b/id1InLW8/api-bofs 
+## Conventions
 
+Les Bofs sont parisiennes donc on parle Français. On code en Anglais.
+
+## Liens utiles
+
+- Kanban du projet: https://github.com/mackwic/api-bofs/projects/1
+- Slack du projet: #bofs-api sur le slack octo-tech
+- URL de l'API: https://bofs-api.scalingo.io
 
 #### Installation
 
