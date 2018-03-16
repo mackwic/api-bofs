@@ -1,8 +1,10 @@
 const logger = require('./logger');
 const rootController = require('./controllers/root');
+const bofsController = require('./controllers/bofs');
 
 const routes = {
   '/': { get: rootController.get },
+  '/bofs/next': { get: bofsController.getNext },
 };
 
 function setupAllRoutesInApp(app, routeObject) {
