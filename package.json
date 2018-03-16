@@ -29,10 +29,10 @@
     "lint": "eslint .",
     "pretest": "npm run lint",
     "start": "node bin/start.js",
-    "test": "npm run test:unit",
-    "test:integration": "mocha --reporter dot --recursive tests/integration",
-    "test:unit": "mocha --reporter dot --recursive tests/unit",
-    "test:watch": "NODE_ENV=test mocha --reporter dot --recursive --watch tests"
+    "test": "npm run test:unit && npm run test:integration",
+    "test:integration": "NODE_ENV=test mocha --timeout 5000 --reporter dot --recursive tests/integration",
+    "test:unit": "NODE_ENV=test mocha --reporter dot --recursive tests/unit",
+    "test:watch": "NODE_ENV=test mocha --timeout 5000 --reporter dot --recursive --watch tests"
   },
   "repository": {
     "type": "git",
