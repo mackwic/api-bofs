@@ -12,6 +12,10 @@ Les Bofs sont parisiennes donc on parle Français. On code en Anglais.
 - Slack du projet: #bofs-api sur le slack octo-tech
 - URL de l'API: https://bofs-api.scalingo.io
 
+#### Configuration
+
+Les informations relatives aux Bofs sont stockées dans des `spreadsheets` Google.
+
 #### Installation
 
 ```bash
