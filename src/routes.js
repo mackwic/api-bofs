@@ -6,13 +6,13 @@ const routes = {
 };
 
 function setupAllRoutesInApp(app, routeObject) {
-  for (routePath of Object.keys(routeObject)) {
-    for (routeMethod of Object.keys(routeObject[routePath])) {
+  Object.keys(routeObject).forEach((routePath) => {
+    Object.keys(routeObject[routePath]).forEach((routeMethod) => {
       const callback = routeObject[routePath][routeMethod];
       Logger.log(`Setup route ${routeMethod.toUpperCase()} ${routePath}`);
       app[routeMethod](routePath, callback);
-    }
-  }
+    });
+  });
 }
 
 module.exports = {
