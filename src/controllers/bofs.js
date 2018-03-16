@@ -1,5 +1,5 @@
 const config = require('../config');
-const spreadsheetController = require('../repositories/spreadsheet')(config.spreadsheet);
+const spreadsheetController = require('../repositories/spreadsheet')(config.document);
 
 module.exports = {
   getNext: async (req, res) => {

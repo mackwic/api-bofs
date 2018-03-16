@@ -11,13 +11,13 @@ const config = Envie({
     .number()
     .default(3000)
     .description('the local PORT on which to listen'),
-  SPREADSHEET_ID: Joi
+  DOCUMENT_ID: Joi
     .string()
-    .describe('Google Sheet ID of octoconf spreadsheet'),
-  SPREADSHEET_CREDENTIALS_CLIENT_EMAIL: Joi
+    .describe('Google Sheet ID of octoconf document'),
+  DOCUMENT_CREDENTIALS_CLIENT_EMAIL: Joi
     .string().email()
     .describe('Email of the Google Console account'),
-  SPREADSHEET_CREDENTIALS_PRIVATE_KEY: Joi
+  DOCUMENT_CREDENTIALS_PRIVATE_KEY: Joi
     .string().replace(/\\n/g, '\n')
     .description('Private Key of the Google Console account'),
 });

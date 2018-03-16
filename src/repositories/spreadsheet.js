@@ -1,10 +1,10 @@
 const GoogleSpreadsheet = require('google-spreadsheet');
 const moment = require('moment');
 
-function getSpreadsheets(config) {
+function getDocument(documentId, serviceCredentials) {
   return new Promise((resolve, reject) => {
-    const doc = new GoogleSpreadsheet(config.id);
-    doc.useServiceAccountAuth(config.credentials, (authError) => {
+    const doc = new GoogleSpreadsheet(documentId);
+    doc.useServiceAccountAuth(serviceCredentials, (authError) => {
       if (authError) return reject(authError);
       return doc.getInfo((getInfoError, spreadsheets) => {
         if (getInfoError) return reject(getInfoError);
@@ -37,15 +37,15 @@ function parseDate(rawFrenchDate) {
 
 function getNextBofDate(config) {
   return async () => {
-    let spreadsheets;
+    let doc;
     try {
-      spreadsheets = await getSpreadsheets(config);
+      doc = await getDocument(config.id, config.credentials);
     } catch (e) {
       return Promise.reject(e);
     }
 
     const INSCRIPTION_WORKSHEET_INDEX = 1;
-    const inscriptionWorksheet = spreadsheets.worksheets[INSCRIPTION_WORKSHEET_INDEX];
+    const inscriptionWorksheet = doc.worksheets[INSCRIPTION_WORKSHEET_INDEX];
 
     let cell;
     try {
