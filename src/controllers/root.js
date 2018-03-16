@@ -1,11 +1,9 @@
-const pkg = require('../../package.json');
+const { name, version, author } = require('../../package.json');
 
 module.exports = {
   get: (req, res) => {
     const json = {
-      name: pkg.name,
-      version: pkg.version,
-      author: pkg.author,
+      name, version, author,
     };
     return res.send(json);
   },

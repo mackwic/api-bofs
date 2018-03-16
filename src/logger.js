@@ -1,7 +1,9 @@
 
+const config = require('./config');
+
 module.exports = {
   log: (msg) => {
-    if (typeof global.it === 'function') {
+    if (config.environment === 'test') {
       return;
     }
 

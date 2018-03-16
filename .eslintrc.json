@@ -1,7 +1,6 @@
 {
     "extends": "airbnb-base",
-    "globals": {
-        "it": true,
-        "describe": true
+    "env": {
+        "mocha": true
     }
 }
