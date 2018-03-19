@@ -1,22 +1,20 @@
 const express = require('express');
-const pkg = require('./package.json');
+
+const Logger = require('./src/logger');
+const Routes = require('./src/routes');
+const config = require('./src/config');
 
 const app = express();
-const config = {
-  PORT: (process.env.PORT || 3000),
-};
 
-app.get('/', (req, res) => {
-  const json = { name: pkg.name, version: pkg.version, author: pkg.author };
-  res.send(json);
-});
+Routes.setupAllRoutesInApp(app, Routes.routes);
 
 if (require.main === module) {
-  // the file is run directly, run the server
-  console.log(`Listing on port ${config.PORT}`);
-  app.listen(config.PORT);
+  // the file is run directly => run the server
+  app.listen(config.port, () => {
+    Logger.log(`Listening on port ${config.port}`);
+  });
 }
 
 module.exports = {
-  app, config,
+  app, config, routes: Routes.routes,
 };
