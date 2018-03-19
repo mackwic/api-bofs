@@ -1,5 +1,5 @@
 const GoogleSpreadsheet = require('google-spreadsheet');
-const moment = require('moment');
+const dateAdapter = require('../adapters/date');
 
 function getBofsDocument(documentId, serviceCredentials) {
   return new Promise((resolve, reject) => {
@@ -30,11 +30,6 @@ function findNextBofDateCell(inscriptionWorksheet) {
   });
 }
 
-function parseDate(rawFrenchDate) {
-  moment.locale('fr');
-  return moment(rawFrenchDate, 'DD MMMM YYYY').format('YYYY-MM-DD');
-}
-
 function getNextBofDate(config) {
   return async () => {
     let doc;
@@ -54,7 +49,7 @@ function getNextBofDate(config) {
       return Promise.reject(e);
     }
 
-    const nextBofDate = parseDate(cell.value);
+    const nextBofDate = dateAdapter.parseNextBofsDate(cell.value);
 
     return Promise.resolve(nextBofDate);
   };
