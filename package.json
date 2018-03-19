@@ -10,8 +10,9 @@
     "joi": "^13.1.2",
     "google-spreadsheet": "^2.0.4",
     "mocha": "^5.0.4",
-    "sinon": "^4.4.6",
     "moment": "^2.21.0",
+    "pify": "^3.0.0",
+    "sinon": "^4.4.6",
     "supertest": "^3.0.0"
   },
   "devDependencies": {
