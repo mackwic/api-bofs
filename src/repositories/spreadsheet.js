@@ -18,20 +18,22 @@ function findNextBofDateCell(inscriptionWorksheet) {
   return pify(inscriptionWorksheet.getCells)(DATE_CELL_POSITION).then(cells => cells[0]);
 }
 
-function getNextBofDate(config) {
-  return async () => {
-    const doc = await getBofsDocument(config.id, config.credentials);
+module.exports = function SpreadsheetRepository(documentId, clientEmail, privateKey) {
+  const credentials = { client_email: clientEmail, private_key: privateKey };
 
-    const INSCRIPTION_WORKSHEET_INDEX = 1;
-    const inscriptionWorksheet = doc.worksheets[INSCRIPTION_WORKSHEET_INDEX];
-    const cell = await findNextBofDateCell(inscriptionWorksheet);
+  return {
+    getNextBofDate() {
+      return async () => {
+        const doc = await getBofsDocument(documentId, credentials);
 
-    const nextBofDate = dateAdapter.parseNextBofsDate(cell.value);
+        const INSCRIPTION_WORKSHEET_INDEX = 1;
+        const inscriptionWorksheet = doc.worksheets[INSCRIPTION_WORKSHEET_INDEX];
+        const cell = await findNextBofDateCell(inscriptionWorksheet);
 
-    return Promise.resolve(nextBofDate);
+        const nextBofDate = dateAdapter.parseNextBofsDate(cell.value);
+
+        return Promise.resolve(nextBofDate);
+      };
+    },
   };
-}
-
-module.exports = config => ({
-  getNextBofDate: getNextBofDate(config),
-});
+};

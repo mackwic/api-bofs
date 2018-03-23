@@ -1,15 +1,12 @@
-const request = require('supertest');
-const assert = require('assert');
-const { describe, it } = require('mocha');
-
-const { app } = require('../../server');
+const app = require('../../server');
+const { expect, request } = require('../utils');
 
 describe('GET /bofs/next', () => {
-  it('respond 200', (done) => {
-    request(app)
-      .get('/bofs/next')
-      .then((response) => {
-        assert.equal(response.body.date, '2018-04-19');
-      }).then(done);
+  it('respond 200', async () => {
+    // arrange
+    // act
+    const response = await request(app).get('/bofs/next');
+    // assert
+    expect(response.body.date).to.equals('2018-04-19');
   });
 });
