@@ -2,8 +2,8 @@
 const config = require('./config');
 
 module.exports = {
-  log: (msg) => {
-    if (config.environment === 'test') {
+  log(msg) {
+    if (config.get('NODE_ENV') === 'test') {
       return;
     }
 

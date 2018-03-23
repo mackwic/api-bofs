@@ -1,20 +1,7 @@
 const express = require('express');
-
-const Logger = require('./src/logger');
-const Routes = require('./src/routes');
-const config = require('./src/config');
+const routes = require('./src/routes');
 
 const app = express();
+routes.setupAllRoutesInApp(app, routes.routes);
 
-Routes.setupAllRoutesInApp(app, Routes.routes);
-
-if (require.main === module) {
-  // the file is run directly => run the server
-  app.listen(config.port, () => {
-    Logger.log(`Listening on port ${config.port}`);
-  });
-}
-
-module.exports = {
-  app, config, routes: Routes.routes,
-};
+module.exports = app;

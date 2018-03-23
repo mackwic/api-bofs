@@ -1,9 +1,9 @@
-const { name, version, author } = require('../../package.json');
+const { name, version, contributors } = require('../../package.json');
 
 module.exports = {
   get: (req, res) => {
     const json = {
-      name, version, author,
+      name, version, contributors,
     };
     return res.send(json);
   },

@@ -1,65 +1,57 @@
-const sinon = require('sinon');
+const { expect, sinon } = require('../utils');
 
-const Routes = require('../../src/routes');
+const routes = require('../../src/routes');
 
 describe('Routes', () => {
-  describe('#setupAllRoutesInApp', () => {
-    it('should exists', () => {
-      // arrange
-      const app = { get: () => {} };
-      // act
-      Routes.setupAllRoutesInApp(app, {});
-      // assert
-    });
-
-    it('should call app methods', () => {
+  describe('.setupAllRoutesInApp(app, routeObject)', () => {
+    it('calls app methods', () => {
       // arrange
       const app = { get: sinon.stub() };
-      const routes = {
+      const routeObject = {
         '/': { get: () => {} },
       };
       // act
-      Routes.setupAllRoutesInApp(app, routes);
+      routes.setupAllRoutesInApp(app, routeObject);
       // assert
-      sinon.assert.calledOnce(app.get);
+      expect(app.get).to.have.been.calledOnce;
     });
 
-    it('should call app methods once per route', () => {
+    it('calls app methods once per route', () => {
       // arrange
       const app = { get: sinon.stub() };
-      const routes = {
+      const routeObject = {
         '/': { get: () => {} },
         '/api': { get: () => {} },
       };
       // act
-      Routes.setupAllRoutesInApp(app, routes);
+      routes.setupAllRoutesInApp(app, routeObject);
       // assert
-      sinon.assert.calledTwice(app.get);
+      expect(app.get).to.have.been.calledTwice;
     });
 
-    it('should call the right app methods according to the descriptor', () => {
+    it('calls the right app methods according to the descriptor', () => {
       // arrange
       const app = { post: sinon.stub() };
-      const routes = {
+      const routeObject = {
         '/': { post: () => {} },
       };
       // act
-      Routes.setupAllRoutesInApp(app, routes);
+      routes.setupAllRoutesInApp(app, routeObject);
       // assert
-      sinon.assert.calledOnce(app.post);
+      expect(app.post).to.have.been.calledOnce;
     });
 
-    it('should call the app method with the callback', () => {
+    it('calls the app method with the callback', () => {
       // arrange
       const app = { post: sinon.stub() };
       const callback = () => {};
-      const routes = {
+      const routeObject = {
         '/': { post: callback },
       };
       // act
-      Routes.setupAllRoutesInApp(app, routes);
+      routes.setupAllRoutesInApp(app, routeObject);
       // assert
-      sinon.assert.calledWith(app.post, '/', callback);
+      expect(app.post).to.have.been.calledWith('/', callback);
     });
   });
 });

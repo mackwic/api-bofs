@@ -1,21 +1,20 @@
-
 const pkg = require('../../../package.json');
-const sinon = require('sinon');
+const { expect, sinon } = require('../../utils');
 
-const RootController = require('../../../src/controllers/root');
+const rootController = require('../../../src/controllers/root');
 
-describe('RootController', () => {
-  describe('#get', () => {
-    it('should return package.json object', () => {
+describe('rootController', () => {
+  describe('.get((req, res))', () => {
+    it('returns package.json object', () => {
       // arrange
       const res = { send: sinon.stub() };
       // act
-      RootController.get({}, res);
+      rootController.get({}, res);
       // assert
-      sinon.assert.calledWith(res.send, {
+      expect(res.send).to.have.been.calledWith({
         name: pkg.name,
         version: pkg.version,
-        author: pkg.author,
+        contributors: pkg.contributors,
       });
     });
   });
