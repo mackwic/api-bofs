@@ -49,7 +49,7 @@ tests
 Les informations relatives aux Bofs sont stockées dans une `spreadsheet` Google. Pour exploiter cette dernière, il est nécessaire de :
 
 - Fournir l'identifiant du document via la variable d'environnement `DOCUMENT_ID`
-- Fournir les identifiants permettant de requêter le document via les variables d'environnement `CLIENT_EMAIL` et `PRIVATE_KEY`
+- Fournir les identifiants permettant de requêter le document via les variables d'environnement `DOCUMENT_CREDENTIALS_CLIENT_EMAIL` et `DOCUMENT_CREDENTIALS_PRIVATE_KEY`
 
 ### Installation
 
