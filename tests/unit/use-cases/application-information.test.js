@@ -1,15 +1,15 @@
 const pkg = require('../../../package.json')
 const { expect, sinon } = require('../../utils')
 
-const rootController = require('../../../src/controllers/root')
+const applicationInformationUseCase = require('../../../src/use-cases/application-information')
 
-describe('rootController', () => {
-  describe('.get((req, res))', () => {
+describe('applicationInformationUseCase', () => {
+  describe('.getApplicationInformation((req, res))', () => {
     it('returns package.json object', () => {
       // arrange
       const res = { send: sinon.stub() }
       // act
-      rootController.get({}, res)
+      applicationInformationUseCase.getApplicationInformation({}, res)
       // assert
       expect(res.send).to.have.been.calledWith({
         name: pkg.name,

@@ -1,6 +1,5 @@
 const GoogleSpreadsheet = require('google-spreadsheet')
 const { promisify } = require('util')
-const dateAdapter = require('../adapters/date')
 
 function getBofsDocument (documentId, serviceCredentials) {
   const doc = new GoogleSpreadsheet(documentId)
@@ -22,17 +21,15 @@ module.exports = function SpreadsheetRepository (documentId, clientEmail, privat
   const credentials = { client_email: clientEmail, private_key: privateKey }
 
   return {
-    getNextBofDate () {
+    getNextBofEventDate () {
       return async () => {
         const doc = await getBofsDocument(documentId, credentials)
 
         const INSCRIPTION_WORKSHEET_INDEX = 1
         const inscriptionWorksheet = doc.worksheets[INSCRIPTION_WORKSHEET_INDEX]
-        const cell = await findNextBofDateCell(inscriptionWorksheet)
+        const rawData = await findNextBofDateCell(inscriptionWorksheet)
 
-        const nextBofDate = dateAdapter.parseNextBofsDate(cell.value)
-
-        return Promise.resolve(nextBofDate)
+        return Promise.resolve(rawData.value)
       }
     }
   }

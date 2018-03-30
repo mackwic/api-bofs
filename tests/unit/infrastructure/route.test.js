@@ -1,6 +1,6 @@
-const { expect, sinon } = require('../utils')
+const { expect, sinon } = require('../../utils')
 
-const routes = require('../../src/routes')
+const routes = require('../../../src/infrastructure/routes')
 
 describe('Routes', () => {
   describe('.setupAllRoutesInApp(app, routeObject)', () => {

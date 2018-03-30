@@ -1,5 +1,5 @@
-const dateAdapter = require('../../../src/adapters/date')
 const assert = require('assert')
+const dateAdapter = require('../../../../src/infrastructure/adapters/date-from-spreadsheet-to-domain')
 
 describe('Date', () => {
   describe('.parseNextBofsDate(:rawDate)', () => {
