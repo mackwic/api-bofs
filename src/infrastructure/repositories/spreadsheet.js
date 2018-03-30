@@ -21,16 +21,14 @@ module.exports = function SpreadsheetRepository (documentId, clientEmail, privat
   const credentials = { client_email: clientEmail, private_key: privateKey }
 
   return {
-    getNextBofEventDate () {
-      return async () => {
-        const doc = await getBofsDocument(documentId, credentials)
+    async getNextBofEventDate () {
+      const doc = await getBofsDocument(documentId, credentials)
 
-        const INSCRIPTION_WORKSHEET_INDEX = 1
-        const inscriptionWorksheet = doc.worksheets[INSCRIPTION_WORKSHEET_INDEX]
-        const rawData = await findNextBofDateCell(inscriptionWorksheet)
+      const INSCRIPTION_WORKSHEET_INDEX = 1
+      const inscriptionWorksheet = doc.worksheets[INSCRIPTION_WORKSHEET_INDEX]
+      const rawData = await findNextBofDateCell(inscriptionWorksheet)
 
-        return Promise.resolve(rawData.value)
-      }
+      return Promise.resolve(rawData.value)
     }
   }
 }

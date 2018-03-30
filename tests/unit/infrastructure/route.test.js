@@ -51,7 +51,30 @@ describe('Routes', () => {
       // act
       routes.setupAllRoutesInApp(app, routeObject)
       // assert
-      expect(app.post).to.have.been.calledWith('/', callback)
+      expect(app.post).to.have.been.calledWith('/')
+    })
+  })
+
+  describe('.hanleErrorsInController(routePath, controller)', () => {
+    it('should be a simple proxy on the UseCase', () => {
+      // arrange
+      const fakeUseCase = sinon.stub()
+      const handler = routes.handleErrorsInController('/', fakeUseCase)
+      // act
+      handler()
+      // assert
+      expect(fakeUseCase).to.have.been.called
+    })
+
+    it('should catch exceptions and return a 500 when the request handler throws', () => {
+      // arrange
+      const response = { status: sinon.stub().returnsThis(), send: sinon.stub() }
+      const fakeUseCase = () => { throw new Error() }
+      const handler = routes.handleErrorsInController('/', fakeUseCase)
+      // act
+      handler({}, response)
+      // assert
+      expect(response.status).to.have.been.calledWith(500)
     })
   })
 })

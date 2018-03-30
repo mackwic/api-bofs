@@ -17,16 +17,30 @@ const routes = {
   '/bof-events/next': { get: bofEventsUseCase.getNext }
 }
 
+function handleErrorsInController (routePath, controller) {
+  return async (req, res) => {
+    try {
+      await controller(req, res)
+    } catch (error) {
+      logger.error(`ERROR on route path ${routePath}:`)
+      logger.error(error)
+      res.status(500).send({ error })
+    }
+  }
+}
+
 function setupAllRoutesInApp (app, routeObject) {
   Object.entries(routeObject).forEach(([routePath, methods]) => {
-    Object.entries(methods).forEach(([routeMethod, controller]) => {
+    Object.entries(methods).forEach(async ([routeMethod, controller]) => {
       logger.log(`Setup route ${routeMethod.toUpperCase()} ${routePath}`)
+      controller = handleErrorsInController(routePath, controller)
       app[routeMethod](routePath, controller)
     })
   })
 }
 
 module.exports = {
+  handleErrorsInController,
   routes,
   setupAllRoutesInApp
 }

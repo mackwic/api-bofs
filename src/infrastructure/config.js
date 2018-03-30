@@ -22,6 +22,7 @@ const config = Envie({
     .description('Private Key of the Google Console account')
 })
 
-config.validate()
+// FIXME don't work
+// config.validate()
 
 module.exports = config
