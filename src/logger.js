@@ -1,13 +1,13 @@
 
-const config = require('./config');
+const config = require('./config')
 
 module.exports = {
-  log(msg) {
+  log (msg) {
     if (config.get('NODE_ENV') === 'test') {
-      return;
+      return
     }
 
     /* eslint no-console: off */
-    console.log(msg);
-  },
-};
+    console.log(msg)
+  }
+}

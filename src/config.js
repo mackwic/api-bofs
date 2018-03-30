@@ -1,5 +1,5 @@
-const Envie = require('envie');
-const Joi = require('joi');
+const Envie = require('envie')
+const Joi = require('joi')
 
 const config = Envie({
   NODE_ENV: Joi
@@ -19,9 +19,9 @@ const config = Envie({
     .describe('Email of the Google Console account'),
   DOCUMENT_CREDENTIALS_PRIVATE_KEY: Joi
     .string().replace(/\\n/g, '\n')
-    .description('Private Key of the Google Console account'),
-});
+    .description('Private Key of the Google Console account')
+})
 
-config.validate();
+config.validate()
 
-module.exports = config;
+module.exports = config

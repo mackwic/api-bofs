@@ -1,57 +1,57 @@
-const { expect, sinon } = require('../utils');
+const { expect, sinon } = require('../utils')
 
-const routes = require('../../src/routes');
+const routes = require('../../src/routes')
 
 describe('Routes', () => {
   describe('.setupAllRoutesInApp(app, routeObject)', () => {
     it('calls app methods', () => {
       // arrange
-      const app = { get: sinon.stub() };
+      const app = { get: sinon.stub() }
       const routeObject = {
-        '/': { get: () => {} },
-      };
+        '/': { get: () => {} }
+      }
       // act
-      routes.setupAllRoutesInApp(app, routeObject);
+      routes.setupAllRoutesInApp(app, routeObject)
       // assert
-      expect(app.get).to.have.been.calledOnce;
-    });
+      expect(app.get).to.have.been.calledOnce
+    })
 
     it('calls app methods once per route', () => {
       // arrange
-      const app = { get: sinon.stub() };
+      const app = { get: sinon.stub() }
       const routeObject = {
         '/': { get: () => {} },
-        '/api': { get: () => {} },
-      };
+        '/api': { get: () => {} }
+      }
       // act
-      routes.setupAllRoutesInApp(app, routeObject);
+      routes.setupAllRoutesInApp(app, routeObject)
       // assert
-      expect(app.get).to.have.been.calledTwice;
-    });
+      expect(app.get).to.have.been.calledTwice
+    })
 
     it('calls the right app methods according to the descriptor', () => {
       // arrange
-      const app = { post: sinon.stub() };
+      const app = { post: sinon.stub() }
       const routeObject = {
-        '/': { post: () => {} },
-      };
+        '/': { post: () => {} }
+      }
       // act
-      routes.setupAllRoutesInApp(app, routeObject);
+      routes.setupAllRoutesInApp(app, routeObject)
       // assert
-      expect(app.post).to.have.been.calledOnce;
-    });
+      expect(app.post).to.have.been.calledOnce
+    })
 
     it('calls the app method with the callback', () => {
       // arrange
-      const app = { post: sinon.stub() };
-      const callback = () => {};
+      const app = { post: sinon.stub() }
+      const callback = () => {}
       const routeObject = {
-        '/': { post: callback },
-      };
+        '/': { post: callback }
+      }
       // act
-      routes.setupAllRoutesInApp(app, routeObject);
+      routes.setupAllRoutesInApp(app, routeObject)
       // assert
-      expect(app.post).to.have.been.calledWith('/', callback);
-    });
-  });
-});
+      expect(app.post).to.have.been.calledWith('/', callback)
+    })
+  })
+})
