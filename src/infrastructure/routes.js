@@ -10,11 +10,11 @@ const spreadsheetRepository = require('./repositories/spreadsheet')(
 const dateAdapter = require('./adapters/date-from-spreadsheet-to-domain')
 // Use cases
 const applicationInformationUseCase = require('../use-cases/application-information')
-const bofUseCase = require('../use-cases/bof-events')(dateAdapter, spreadsheetRepository)
+const bofEventsUseCase = require('../use-cases/bof-events')(dateAdapter, spreadsheetRepository)
 
 const routes = {
   '/': { get: applicationInformationUseCase.getApplicationInformation },
-  '/bof/next': { get: bofUseCase.getNext }
+  '/bof-events/next': { get: bofEventsUseCase.getNext }
 }
 
 function setupAllRoutesInApp (app, routeObject) {
