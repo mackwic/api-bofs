@@ -13,7 +13,7 @@ describe('applicationInformationUseCase', () => {
       // assert
       expect(res.send).to.have.been.calledWith({
         name: pkg.name,
-        version: pkg.version,
+        version: `${pkg.version}+${process.env.CONTAINER_VERSION}`,
         contributors: pkg.contributors
       })
     })
