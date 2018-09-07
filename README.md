@@ -23,7 +23,7 @@ Comme Bof est un acronyme, il n'a pas de pluriel ni de genre.
 
 - Kanban du projet: https://github.com/mackwic/api-bofs/projects/1
 - Slack du projet: #bofs-api sur le slack octo-tech
-- URL de l'API: https://bofs-api.scalingo.io
+- URL de l'API: https://bof-api.octo.com
 
 ## Architecture
 
