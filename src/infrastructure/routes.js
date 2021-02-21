@@ -11,10 +11,12 @@ const dateAdapter = require('./adapters/date-from-spreadsheet-to-domain')
 // Use cases
 const applicationInformationUseCase = require('../use-cases/application-information')
 const bofEventsUseCase = require('../use-cases/bof-events')(dateAdapter, spreadsheetRepository)
+const bofSlotUseCase = require('../../src/use-cases/bof-slots')(spreadsheetRepository)
 
 const routes = {
   '/': { get: applicationInformationUseCase.getApplicationInformation },
-  '/bof-events/next': { get: bofEventsUseCase.getNext }
+  '/bof-events/next': { get: bofEventsUseCase.getNext },
+  '/bof-events/next/tracks/:track/hours/:hour': { get: bofSlotUseCase.getForNextEventByTrackAndHour }
 }
 
 function handleErrorsInController (routePath, controller) {
@@ -24,7 +26,12 @@ function handleErrorsInController (routePath, controller) {
     } catch (error) {
       logger.error(`ERROR on route path ${routePath}:`)
       logger.error(error)
-      res.status(500).send({ error })
+      res.status(500).send({
+        error: {
+          message: error.message,
+          stacktrace: error.stack.split('\n')
+        }
+      })
     }
   }
 }

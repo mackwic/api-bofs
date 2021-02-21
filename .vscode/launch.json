@@ -9,21 +9,35 @@
             "request": "launch",
             "name": "Mocha Tests",
             "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "env": {
+                "NODE_ENV": "test",
+                "DOCUMENT_ID": "1brCocctJHVJUZCGPO6v3KZKlWhZEP1NtqFgTqKGz8KI",
+                "DOCUMENT_CREDENTIALS_CLIENT_EMAIL": "scalingo-server@bof-api-199616.iam.gserviceaccount.com",
+                "DOCUMENT_CREDENTIALS_PRIVATE_KEY": "==REDACTED=="
+            },
             "args": [
-                "-u",
-                "tdd",
+                "--colors",
+                "--recursive",
                 "--timeout",
                 "999999",
-                "--colors",
-                "${workspaceFolder}/test"
+                "--reporter",
+                "dot",
+                "${workspaceFolder}/tests"
             ],
             "internalConsoleOptions": "openOnSessionStart"
         },
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}/server.js"
+            "name": "Server launch",
+            "program": "${workspaceFolder}/bin/start.js",
+            "env": {
+                "NODE_ENV": "development",
+                "DOCUMENT_ID": "1brCocctJHVJUZCGPO6v3KZKlWhZEP1NtqFgTqKGz8KI",
+                "DOCUMENT_CREDENTIALS_CLIENT_EMAIL": "scalingo-server@bof-api-199616.iam.gserviceaccount.com",
+                "DOCUMENT_CREDENTIALS_PRIVATE_KEY": "== REDACTED=
+            },
+            "internalConsoleOptions": "openOnSessionStart"
         }
     ]
 }

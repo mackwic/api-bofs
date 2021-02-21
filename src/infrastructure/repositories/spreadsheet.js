@@ -29,6 +29,10 @@ module.exports = function SpreadsheetRepository (documentId, clientEmail, privat
       const rawData = await findNextBofDateCell(inscriptionWorksheet)
 
       return Promise.resolve(rawData.value)
+    },
+
+    async getSlotInfoByTrackAndHour (track, hour) {
+      return Promise.reject(new Error('unimplemented'))
     }
   }
 }
